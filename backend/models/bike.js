@@ -35,7 +35,7 @@ const delete_bike = (id) =>{
         console.log(`Bike with id ${id} not found.`);
     }
 }
-
+// Handle find a bike in the arraylist
 const find_bike = (id) => {
     console.log("finding....")
     console.log({id: id})

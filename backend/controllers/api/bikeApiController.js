@@ -31,6 +31,7 @@ exports.create_bike = (req, res) => {
     })
 }
 
+// Allows delete a element in our app.
 exports.delete_bike = (req, res) => {
 
     Bike.delete_bike(req.body.id)
