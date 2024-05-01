@@ -1,9 +1,37 @@
-let map = L.map('map').setView([4.579583235006287, -74.15714591958991], 13);
-// 4.579583235006287, -74.15714591958991
+// Jhonattan Aponte - 20212578062
+// Laura Aponte - 20212578082
+
+const map = L.map('map').setView([4.579583235006287, -74.15714591958991], 13);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-L.marker([4.579583235006287, -74.15714591958991]).addTo(map)
+const addMarkerToMap = (location) => {
+    L.marker(location).addTo(map);
+};
+
+fetch('bikes/api')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data.bikes);
+        console.log(typeof(data.bikes));
+
+        for (const bikesKey of data.bikes) {
+            console.log(bikesKey)
+            console.log(bikesKey.location)
+            addMarkerToMap(bikesKey.location)
+        }
+
+
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+

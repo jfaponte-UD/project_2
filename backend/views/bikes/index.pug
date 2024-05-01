@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+
+    // Jhonattan Aponte
+    // Laura Aponte
+
+    .d-flex.justify-content-center.mt-3
+        a.btn.btn-primary(href='/bikes/create') Add New Bike
+
+    .d-flex.justify-content-center.mt-3
+        table.table.table-striped.text-center
+            thead
+                tr
+                    th(scope='col') #
+                    th(scope='col') Color
+                    th(scope='col') Model
+                    th(scope='col') Location
+                    th(scope='col') Actions
+
+            tbody
+                each bike in bikes
+                    tr
+                        td(scope='row')= bike.id
+                        td= bike.color
+                        td= bike.model
+                        td= bike.location
+                        td
+                            form.inline(method='post', action=`/bikes/delete/${bike.id}`, id=`deleteForm${bike.id}`)
+                                input(type='hidden' name='id' value=bike.id)
+                                button.btn.btn-danger(type='submit') Delete
+                        td
+                            a.btn.btn-info.m-1(href=`/bikes/modify/${bike.id}`) Edit
+

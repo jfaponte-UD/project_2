@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+    .container
+        .row.justify-content-center
+            .col-md-6.mt-4
+                a(href='/bikes').btn.btn-secondary Volver
+                br
+                h1 New Bike
+                br
+                form(action='/bikes/create' method='post')
+                    .form-group
+                        label(for='id') ID:
+                        input(type='text' id='id' name='id' class='form-control')
+                    .form-group
+                        label(for='color') Color:
+                        input(type='text' id='color' name='color' class='form-control')
+                    .form-group
+                        label(for='model') Model:
+                        input(type='text' id='model' name='model' class='form-control')
+                    .form-group
+                        label(for='lat') Lat:
+                        input(type='text' id='lat' name='lat' class='form-control')
+                    .form-group
+                        label(for='lng') Lng:
+                        input(type='text' id='lng' name='lng' class='form-control')
+                    button(type='submit' class='btn btn-primary').mt-3 Add Bike
