@@ -11,18 +11,21 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const addMarkerToMap = (location) => {
     L.marker(location).addTo(map);
 };
-
+// using Method get to get all elements in this case all bikes.
 fetch('bikes/api')
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
+        // convert the response in a json to understand the obj
         return response.json();
     })
     .then(data => {
         console.log(data.bikes);
         console.log(typeof(data.bikes));
 
+
+        // print all markers in the map
         for (const bikesKey of data.bikes) {
             console.log(bikesKey)
             console.log(bikesKey.location)
