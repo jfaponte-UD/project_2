@@ -1,53 +1,46 @@
 // Jhonattan Aponte - 20212578062
 // Laura Aponte - 20212578082
 
-const bikesList = []
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-class Bike {
-    constructor(id, color, model, location) {
-        this.id = id;
-        this.color = color;
-        this.model = model;
-        this.location = location;
+const bikeSchema = new Schema({
+    code: Number,
+    color: String,
+    model: String,
+    location: {
+        type: [Number],
+        index: { type: '2dsphere', sparse: true }
     }
+})
 
-    toString() {
-        return `id: ${this.id} || color: ${this.color}`;
-    }
+bikeSchema.statics.createInstance = function(code, color, model, location) {
+    return new this({
+        code,
+        color,
+        model,
+        location
+    })
 }
 
-const add_bike = (bike) => {
-    bikesList.push(bike)
+bikeSchema.methods.toString = function() {
+    return `code: ${this.code} || color: ${this.color}`
 }
 
-let bike1 = new Bike(1, "red", "gw", [4.579583235006287, -74.15714591958991])
-let bike2 = new Bike(2, "blue", "Gtx", [4.579583235006287, -74.160])
-
-bikesList.push(bike1)
-bikesList.push(bike2)
-
-const delete_bike = (id) =>{
-    const index = bikesList.findIndex(bike => bike.id === id);
-    if (index !== -1) {
-        bikesList.splice(index, 1);
-        console.log(`Bike with id ${id} deleted successfully.`);
-    } else {
-        console.log(`Bike with id ${id} not found.`);
-    }
-}
-// Handle find a bike in the arraylist
-const find_bike = (id) => {
-    console.log("finding....")
-    console.log({id: id})
-    console.log("finding....")
-
-    return bikesList.find(bike => bike.id === parseInt(id));
+bikeSchema.statics.add = function(bike, cb) {
+    this.create(bike, cb)
 }
 
-module.exports = {
-    Bike,
-    bikesList,
-    add_bike,
-    delete_bike,
-    find_bike
-};
+bikeSchema.statics.getBikesList = async function(cb) {
+    return this.find({}, cb)
+}
+
+bikeSchema.statics.findByCode = function(code, cb) {
+    return this.findOne({ code: code }, cb)
+}
+
+bikeSchema.statics.removeByCode = function(code, cb) {
+    return this.deleteOne({ code: code }, cb)
+}
+
+module.exports = mongoose.model('Bike', bikeSchema)

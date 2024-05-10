@@ -1,21 +1,15 @@
 // Jhonattan Aponte - 20212578062
 // Laura Aponte - 20212578082
 
-
-
 const Bike = require('../../models/bike')
-
-
 
 //Get all elements in the list
 exports.bikes_list = (req, res) =>{
-    res.status(200).json(
-        {
+    res.status(200).json({
             bikes: Bike.bikesList
         }
     )
 }
-
 
 //Allows save or push a new bike
 exports.create_bike = (req, res) => {

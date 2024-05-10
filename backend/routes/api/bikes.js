@@ -1,8 +1,6 @@
 // Jhonattan Aponte - 20212578062
 // Laura Aponte - 20212578082
 
-
-
 const express = require('express')
 const router = express.Router()
 const bikeController = require('../../controllers/api/bikeApiController')

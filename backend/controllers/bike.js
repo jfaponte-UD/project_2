@@ -18,8 +18,6 @@ exports.bike_create_post = (req, res) => {
 
     //parser the location to array
     let location = [req.body.lat, req.body.lng]
-    console.log(req.body)
-    console.log(location)
 
     // Create a bike using the attributes from the view
     let bike = new Bike.Bike(
@@ -46,17 +44,12 @@ exports.bike_delete = (req, res) => {
 exports.bike_modify_get = (req, res) => {
 
     let bike = Bike.find_bike(req.params.id)
-    console.log(bike)
     res.render("bikes/modify", {bike})
 }
 
 exports.bike_modify_post = (req, res) => {
     // get the bike
     let bike = Bike.find_bike(req.body.id)
-
-    console.log('EDITING')
-    console.log(bike)
-    console.log('EDITING')
 
     bike.id = req.body.id
     bike.color = req.body.color
