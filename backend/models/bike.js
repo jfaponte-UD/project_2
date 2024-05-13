@@ -5,7 +5,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const bikeSchema = new Schema({
-    _id: mongoose.Schema.Types.ObjectId,
     code: Number,
     color: String,
     model: String,
@@ -17,13 +16,12 @@ const bikeSchema = new Schema({
 
 bikeSchema.statics.createInstance = function(code, color, model, location) {
     return new this({
-        _id: new mongoose.Types.ObjectId(),
-        code,
-        color,
-        model,
-        location
-    })
-}
+        code: code,
+        color: color,
+        model: model,
+        location: location
+    });
+};
 
 bikeSchema.methods.toString = function() {
     return `code: ${this.code} || color: ${this.color}`

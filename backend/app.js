@@ -1,25 +1,24 @@
 // Jhonattan Aponte - 20212578062
 // Laura Aponte - 20212578082
 
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 const bikesRouter = require('./routes/bikes')
 const bikesApi = require('./routes/api/bikes')
 const usersApi = require('./routes/api/users')
 
-var app = express();
-var mongoose = require('mongoose')
-var mongoDB = "mongodb://localhost:27017/bikes"
-mongoose.connect(mongoDB, {useNewUrlParser: true })
+const app = express();
+const mongoose = require('mongoose')
+const mongoDB = "mongodb://localhost:27017/bikes"
+mongoose.connect(mongoDB, {useNewUrlParser: true}).then(r => {console.log({r: 200})})
 mongoose.Promise = global.Promise
-var db = mongoose.connection
-db.on('error', console.error.bind(console, 'MongoDB connection error:'))
+mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

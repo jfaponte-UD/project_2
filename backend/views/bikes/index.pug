@@ -9,6 +9,11 @@ block content
         a.btn.btn-primary(href='/bikes/create') Add New Bike
 
     .d-flex.justify-content-center.mt-3
+        pre
+            //- Convierte el objeto bikes a JSON y lo muestra
+            = JSON.stringify(bikes, null, 2)
+
+    .d-flex.justify-content-center.mt-3
         table.table.table-striped.text-center
             thead
                 tr
