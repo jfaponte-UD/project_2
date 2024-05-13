@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const bikesRouter = require('./routes/bikes')
 const bikesApi = require('./routes/api/bikes')
+const usersApi = require('./routes/api/users')
 
 var app = express();
 var mongoose = require('mongoose')
@@ -34,6 +35,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/bikes', bikesRouter)
 app.use('/bikes/api', bikesApi)
+app.use('/users/api', usersApi)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

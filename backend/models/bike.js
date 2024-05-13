@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const bikeSchema = new Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     code: Number,
     color: String,
     model: String,
@@ -16,6 +17,7 @@ const bikeSchema = new Schema({
 
 bikeSchema.statics.createInstance = function(code, color, model, location) {
     return new this({
+        _id: new mongoose.Types.ObjectId(),
         code,
         color,
         model,
@@ -31,7 +33,7 @@ bikeSchema.statics.add = function(bike, cb) {
     this.create(bike, cb)
 }
 
-bikeSchema.statics.getBikesList = async function(cb) {
+bikeSchema.statics.getBikesList = function(cb) {
     return this.find({}, cb)
 }
 

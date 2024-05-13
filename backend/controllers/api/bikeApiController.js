@@ -6,7 +6,7 @@ const Bike = require('../../models/bike')
 //Get all elements in the list
 exports.bikes_list = (req, res) =>{
     res.status(200).json({
-            bikes: Bike.bikesList
+            bikes: Bike.getBikesList
         }
     )
 }
@@ -15,9 +15,9 @@ exports.bikes_list = (req, res) =>{
 exports.create_bike = (req, res) => {
     let location = [req.body.lat, req.body.lng]
 
-    const bike = new Bike.Bike(req.body.id, req.body.color, req.body.model, location)
+    const bike = new Bike(req.body.id, req.body.color, req.body.model, location)
 
-    Bike.add_bike(bike)
+    Bike.add(bike)
 
     res.status(200).json({
         code: 202,
